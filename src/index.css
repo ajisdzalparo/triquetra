@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary-blue: #560bad;
+    --color-primary-blue-hover: #2d0c56;
+    --color-secondary-blue: #dbb6f480;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-3 sm:px-6 lg:px-8;
+  }
+}
+
+@theme {
+  --color-primary-blue: var(--color-pirmary-blue);
+  --color-secondary-blue: var(--color-secondary-blue);
+  --color-primary-blue-hover: var(--color-primary-blue-hover);
+}
