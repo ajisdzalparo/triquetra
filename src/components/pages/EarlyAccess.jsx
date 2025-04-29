@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import Navbar from "../atoms/Navbar";
 import Footer from "../organism/Footer";
 import { useForm, FormProvider } from "react-hook-form";
@@ -9,12 +9,33 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 const EarlyAccess = () => {
   const methods = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const [recaptchaError, setRecaptchaError] = useState("");
+  const [recaptchaVerified, setRecaptchaVerified] = useState(false);
+  const recaptchaRef = useRef();
 
   const handleRecaptchaChange = (value) => {
-    console.log("Captcha value:", value);
+    setRecaptchaVerified(!!value);
+    setRecaptchaError("");
+  };
+
+  const handleRecaptchaExpired = () => {
+    setRecaptchaVerified(false);
+    setRecaptchaError("reCAPTCHA expired. Please verify again.");
+  };
+
+  const handleRecaptchaError = () => {
+    setRecaptchaVerified(false);
+    setRecaptchaError("Error loading reCAPTCHA. Please try again.");
+  };
+
+  const onSubmit = async (data) => {
+    if (!recaptchaVerified) {
+      setRecaptchaError("Please complete the reCAPTCHA verification");
+      recaptchaRef.current.reset();
+      return;
+    }
+
+    console.log(data);
   };
 
   return (
@@ -128,14 +149,23 @@ const EarlyAccess = () => {
               {/* Google reCAPTCHA UI */}
               <div className="mt-4 mb-10">
                 <ReCAPTCHA
-                  sitekey="your-site-key"
+                  ref={recaptchaRef}
+                  sitekey="6Ldo7icrAAAAAO6-NGPcDPlzD_mLVCof0pEf92zd"
                   onChange={handleRecaptchaChange}
+                  onExpired={handleRecaptchaExpired}
+                  onErrored={handleRecaptchaError}
                   className="mx-auto"
+                  theme="light"
+                  size="normal"
                 />
+                {recaptchaError && (
+                  <p className="text-red-500 text-sm mb-4">{recaptchaError}</p>
+                )}
               </div>
 
               <button
                 type="submit"
+                disabled={!recaptchaVerified}
                 className="w-full bg-primary-blue hover:bg-primary-blue-hover cursor-pointer text-white font-medium py-2 px-4 rounded-md transition duration-300"
               >
                 Submit

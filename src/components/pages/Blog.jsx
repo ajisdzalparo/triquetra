@@ -267,7 +267,7 @@ const Blog = () => {
             className="md:text-sm lg:text-base xl:text-[20px] text-white font-normal"
           >
             Learn more about Triquetra Converge360™ at 
-            <a className="underline mx-2" href="#">
+            <a className="underline mx-2" href="https://site.triquetra.cc/">
               triquetra.cc
             </a>
              or reach out at info@triquetra.cc.

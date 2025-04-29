@@ -139,7 +139,7 @@ const Demo = () => {
               {/* Google reCAPTCHA UI */}
               <div className="mt-4 mb-10">
                 <ReCAPTCHA
-                  sitekey="your-site-key"
+                  sitekey="6Ldo7icrAAAAAO6-NGPcDPlzD_mLVCof0pEf92zd"
                   onChange={handleRecaptchaChange}
                   className="mx-auto"
                 />
