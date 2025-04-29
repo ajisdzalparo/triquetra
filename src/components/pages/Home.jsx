@@ -203,11 +203,11 @@ const Home = () => {
 
           <InfoSection items={infoItems} />
           <div className="flex flex-col items-center">
-            <Button variant="default" className="w-full md:w-[300px] mt-5">
-              <a href="/pdf/Triquetra Converge360 Platform.pdf" target="_blank">
+            <a href="/pdf/Triquetra Converge360 Platform.pdf" target="_blank">
+              <Button variant="default" className="w-full md:w-[300px] mt-5">
                 Download Solution Document
-              </a>
-            </Button>
+              </Button>
+            </a>
           </div>
         </motion.div>
       </section>
